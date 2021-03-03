@@ -1,0 +1,35 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+    <h1 class="title">{{title}}</h1>
+    
+    {% for article in articles %}
+            <article class="article-item">
+                {% if articulo.image != 'null' and articulo.image.url|length >= 1 %}
+                   <div class="image">
+                        <img src="{{article.image.url}}">
+                    </div>
+                {% endif %}
+                <div class="data">     
+                    <h2>{{article.title}}</h2>
+                    <p>
+                        {% for category in article.categories.all %}
+                            <a href="#">{{category}} </a>  
+                            {% if forloop.counter < article.categories.all|length %}
+                                {{' - '}}
+                            {%endif%}
+                        {% endfor %}
+                    </p>
+                    <span class="date">
+                        {{article.user}}
+                        {{article.created_at}}
+                    </span>
+                    <p>{{article.content|safe}}</p>
+                </div>
+                <div class="clearfix"></div>
+            </article>
+            <br>
+        {% endfor %}
+{% endblock content %}

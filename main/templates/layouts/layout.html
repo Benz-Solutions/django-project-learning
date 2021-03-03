@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %} | Blog</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="{% static 'images/logo.png' %}" alt="logo">
+            <h1>Sitio web con django</h1>
+        </div>
+    </header>
+    <nav>
+        <a href="{% url 'index' %}">Inicio</a>
+        {% for page in pages %}
+            <a href="{% url 'page' page.2 %}">{{page.1}}</a>
+        {% endfor %}
+    </nav>
+    <div class="barra">
+        <span class="esquina-izquierda"></span>
+        <span class="relleno-barra"></span>
+        <span class="esquina-derecha"></span>
+    </div>
+    <div id="content">
+        <div class="box">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+    <footer>
+        Master en Python &copy; {% now "Y" %}
+    </footer>
+</body>
+</html>
